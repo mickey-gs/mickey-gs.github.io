@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<title>Caesar Cipher</title>
+<link href="scripts.css" rel="stylesheet">
+<style>
+    .inputs {
+        font-size: 30px;
+        width: 25%;
+        height: auto;
+        margin-right: 2.5%;
+        border: 1px solid rgb(180, 180, 180);
+    }
+
+    #output {
+        width: 60%;
+        padding: 0.5em 1em 0.5em 1em;
+        height: auto;
+        min-height: 40%;
+        background-color: white;
+        border: 1px solid rgb(180, 180, 180);
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            CAESAR CIPHER
+            <div id="dropdownBox">
+                <div class="dropdown"><a href="index.html">Home</a></div>
+                <div class="dropdown"><a href="websites.html">Websites</a></div>
+                <div class="dropdown">Scripts</div>
+                <div class="dropdown">Ruby</div>
+            </div>
+        </div>
+        <div id="spacing"></div>
+        <div id="main">
+            <h3>This page allows you to encode messages using a simple
+                Caesar cipher. Enter the phrase you want to encode, and the key
+                you want to encode it with below. Because keys larger than 26
+                (and below -26) simply loop, there is no need to go beyond these 
+                figures.
+            </h3>
+        <div id="spacing"></div>
+        <input type="text" class="inputs" id="textInput" placeholder="Your text here:"></input>
+        <input type="text" class="inputs" id="keyInput" placeholder="Key:"></input>
+        <button id="generate">Generate!</button>
+        <div id="spacing"></div>
+        <h3><div id="output">Your output will appear here.</div></h3>
+        </div>
+    </div>
+</body>
+<script>
+    const textInput = document.getElementById("textInput");
+    const keyInput = document.getElementById("keyInput");
+    const generate = document.getElementById("generate");
+    const output = document.getElementById("output");
+
+    let caesar = function(phrase, key) {
+    let phraseArray = Array.from(phrase);
+    let numberPhrase = convertWord(phrase.toLowerCase());
+    let cipherNumbers = [];
+    for (i = 0; i < phrase.length; i++) {
+        if (numberPhrase[i] < 1000) {
+            if ((numberPhrase[i] + key) > 26 && numberPhrase[i] + key < 26 * 2) {
+                console.log("true");
+                cipherNumbers[i] = ((numberPhrase[i] + key) - 26);
+                console.log(cipherNumbers[i]);
+            }
+            else if ((numberPhrase[i] + key) > 26 * 2 && numberPhrase[i] + key < 26 * 3) {
+                cipherNumbers[i] = ((numberPhrase[i] + key) - (26 * 2));
+            }
+            else if ((numberPhrase[i] + key) > 26 * 3 && numberPhrase[i] + key < 26 * 4) {
+                cipherNumbers[i] = ((numberPhrase[i] + key) - (26 * 3));
+            }
+            else if ((numberPhrase[i] + key) > 26 * 4 && numberPhrase[i] + key < 26 * 5) {
+                cipherNumbers[i] = ((numberPhrase[i] + key) - (26 * 4));
+            }
+            else if ((numberPhrase[i] + key) > 26 * 5) {
+                cipherNumbers[i] = ((numberPhrase[i] + key) - (26 * 5));
+            }
+            else if (numberPhrase[i] + key < 0 && numberPhrase[i] + key > -26) {
+                cipherNumbers[i] = (numberPhrase[i] + key + 26);
+            }
+            else if (numberPhrase[i] + key < -26 && numberPhrase[i] + key > (-26 * 2)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 2));
+            }
+            else if (numberPhrase[i] + key < (-26 * 2) && numberPhrase[i] + key > (-26 * 3)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 3));
+            }
+            else if (numberPhrase[i] + key < (-26 * 3) && numberPhrase[i] + key > (-26 * 4)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 4));
+            }
+            else if (numberPhrase[i] + key < (-26 * 4) && numberPhrase[i] + key > (-26 * 5)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 5));
+            }
+            else if (numberPhrase[i] + key < (-26 * 5) && numberPhrase[i] + key > (-26 * 6)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 6));
+            }
+            else if (numberPhrase[i] + key < (-26 * 5) && numberPhrase[i] + key > (-26 * 6)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 7));
+            }
+            else if (numberPhrase[i] + key < (-26 * 6) && numberPhrase[i] + key > (-26 * 7)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 8));
+            }
+            else if (numberPhrase[i] + key < (-26 * 7) && numberPhrase[i] + key > (-26 * 8)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 9));
+            }
+            else if (numberPhrase[i] + key < (-26 * 8) && numberPhrase[i] + key > (-26 * 9)) {
+                cipherNumbers[i] = (numberPhrase[i] + key + (26 * 10));
+            }
+            else cipherNumbers[i] = numberPhrase[i] + key;
+        }
+        else cipherNumbers[i] = numberPhrase[i];
+    }
+    console.log(cipherNumbers);
+    let cipherPhrase = [];
+    for (i = 0; i < cipherNumbers.length; i++) {
+        if (cipherNumbers[i] < 1000) {
+            cipherPhrase[i] = numberToLetter(cipherNumbers[i]);
+        }
+        else cipherPhrase[i] = phraseArray[i];
+    }
+    console.log(phraseArray);
+    for (i = 0; i < phraseArray.length; i++) {
+        if (phraseArray[i] == phraseArray[i].toUpperCase()) {
+            cipherPhrase[i] =  cipherPhrase[i].toUpperCase();
+        }}
+    let cipher = cipherPhrase.join("");
+    output.textContent = cipher;
+}
+
+let convertWord = function(input) {
+    let letters = Array.from(input);
+    console.log(letters);
+    let numbers = [];
+    for (i = 0; i < letters.length; i++) {
+        console.log(letters[i]);
+        numbers.push(letterToNumber(letters[i]));
+    }
+    console.log(numbers)
+    return numbers;
+}
+
+let letterToNumber = function(input) {
+    switch(input) {
+        case "a": num = 1; break;
+        case "b": num = 2; break;
+        case "c": num = 3; break;
+        case "d": num = 4; break; 
+        case "e": num = 5; break;
+        case "f": num = 6; break;
+        case "g": num = 7; break;
+        case "h": num = 8; break;
+        case "i": num = 9; break;
+        case "j": num = 10; break;
+        case "k": num = 11; break;
+        case "l": num = 12; break;
+        case "m": num = 13; break;
+        case "n": num = 14; break;
+        case "o": num = 15; break;
+        case "p": num = 16; break;
+        case "q": num = 17; break;
+        case "r": num = 18; break;
+        case "s": num = 19; break;
+        case "t": num = 20; break;
+        case "u": num = 21; break;
+        case "v": num = 22; break;
+        case "w": num = 23; break;
+        case "x": num = 24; break;
+        case "y": num = 25; break;
+        case "z": num = 26; break;
+        case " ": num = 1001; break;
+        case ",": num = 1002; break;
+        case ".": num = 1003; break;
+        case "!": num = 1004; break;
+        case "?": num = 1005; break;
+        case "\''": num = 1006; break;
+        default: num = 6969;
+    }
+    return num;
+}
+
+let numberToLetter = function(input) {
+    switch(input) {
+        case 1: ltr = "a"; break;
+        case 2: ltr = "b"; break;
+        case 3: ltr = "c"; break;
+        case 4: ltr = "d"; break;
+        case 5: ltr = "e"; break;
+        case 6: ltr = "f"; break;
+        case 7: ltr = "g"; break;
+        case 8: ltr = "h"; break;
+        case 9: ltr = "i"; break;
+        case 10: ltr = "j"; break;
+        case 11: ltr = "k"; break;
+        case 12: ltr = "l"; break;
+        case 13: ltr = "m"; break;
+        case 14: ltr = "n"; break;
+        case 15: ltr = "o"; break;
+        case 16: ltr = "p"; break;
+        case 17: ltr = "q"; break;
+        case 18: ltr = "r"; break;
+        case 19: ltr = "s"; break;
+        case 20: ltr = "t"; break;
+        case 21: ltr = "u"; break;
+        case 22: ltr = "v"; break;
+        case 23: ltr = "w"; break;
+        case 24: ltr = "x"; break;
+        case 25: ltr = "y"; break;
+        case 26: ltr = "z"; break;
+        default: ltr = "whoops"
+    }
+    return ltr;
+}
+
+let initCaesar = function() {
+    caesar(textInput.value, Number(keyInput.value));
+}
+
+generate.addEventListener("click", initCaesar);
+</script>
+</html>

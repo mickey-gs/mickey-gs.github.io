@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= sign %>
+  </title>
+  <link href="astrology.css" rel="stylesheet">
+  <style>
+      #wrap {
+        height: auto;
+        width: 100%;
+        background-color: rgb(35, 35, 35);
+        display: flex;
+        flex-direction: column;
+        font-family: Jost;
+        vertical-align: baseline;
+      }
+
+      a {
+          color: white;
+          text-decoration: none;
+      }
+
+      a:visited {
+          color: white;
+          text-decoration: none;
+      }
+
+      #title {
+        background-image: none;
+        background: rgb(49, 49, 49);
+      }
+
+      #main {
+        display: block;
+        margin: 0;
+        padding: 0;
+      }
+
+      #mainText {
+        height: auto;
+        width: 70%;
+        margin: 0 0 0 2.5%;
+      }
+
+      #header {
+        font-family: Jost;
+      }
+  </style>
+</head>
+<body>
+    <div id="header">
+      <div id="dropdownBox">
+          <div class="dropdown" style="color: white; text-decoration: none;"><a href="/home/michael/coding/websites/mickey-gs.github.io/index.html">Home</a></div>
+          <div class="dropdown" style="color: inherit; text-decoration: none;"><a href="websites.html">Websites</a></div>
+          <div class="dropdown">Scripts</div>
+          <div class="dropdown">Ruby</div>
+      </div>
+    </div>
+      <div id="title">
+        <div id="titleContent">
+          <%= sign%>
+        </div>
+      </div>
+      <div id="wrap">
+        <div id="spacing"></div>
+        <div id="main">
+          <div id="mainText">
+            <h2><u>Traits</u></h2>
+              <h3>
+                <%= traits %>
+              </h3>
+            <h2><u>Gifts</u></h2>
+            <h3>
+              <%= gifts %>
+            </h3>
+            <h2><u>Challenges</u></h2>
+            <h3>
+              <%= challenges %>
+            </h3>
+          </div>
+        </div>
+        <div id="spacing"></div>
+      </div>
+</body>
+</html>

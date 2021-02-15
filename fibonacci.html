@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fibonacci</title>
+<link href="scripts.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            FIBONACCI
+            <div id="dropdownBox">
+                <div class="dropdown"><a href="index.html">Home</a></div>
+                <div class="dropdown"><a href="websites.html">Websites</a></div>
+                <div class="dropdown">Scripts</div>
+                <div class="dropdown">Ruby</div>
+            </div>
+        </div>
+        <div id="spacing"></div>
+        <div id="main">
+            <h3>A fibonacci sequence is a sequence where any term in the sequence
+                is equal to the sum of the two preceding terms. The simplest
+                example of this is the sequence starting with 0, 1, 1, 2, etc.<br>
+                This script allows you to generate the nth term of that 
+                Fibonacci sequence.
+            </h3>
+            <div id="spacing"></div>
+            <input type="text" class="inputs" placeholder="Enter term number here"></input>
+            <button id="generate">Generate!</button>
+            <div id="spacing"></div>
+            <div id="outputs" style="height: auto; width: 40%; font-size: inherit;
+            min-height: 40%; min-width: 20%; max-width: 40%"><h3>The number will appear here.</h3></div>
+        </div>
+    </div>
+</body>
+<script>
+const fibonacci = function(m) {
+    let x = 0;
+    let y = 1;
+    let n = Number(m) - 1;
+    let loops = correctLoops(n);
+    if (n < 0) {result = "OOPS"}
+    else {
+        for (i = 0; i <= loops; i++) {
+            x += y;
+            y += x;
+        }
+    }
+    if (checkParity(n)) {result = y}
+    else {result = x}
+    output.textContent = result;
+    output.setAttribute("style", "font-size: 100px; padding: 0")
+    return result; 
+}
+
+function checkParity(input) {
+    if ((input / 2) == Math.floor(input / 2)) {result = 1}
+    else {result = 0}
+    return result;
+}
+
+function correctLoops(z) {
+    if (checkParity(z)) {result = Math.floor((z - 1) / 2)}
+    else {result = Math.floor(z / 2)}
+    return result;
+}
+
+const input = document.querySelector(".inputs");
+const output = document.getElementById("outputs");
+const generate = document.getElementById("generate");
+
+let initFibonacci = function() {
+    fibonacci(input.value);
+}
+
+generate.addEventListener("click", initFibonacci);
+
+
+</script>
+</html>

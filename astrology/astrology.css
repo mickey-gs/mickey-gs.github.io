@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap");
+
+body,html {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    min-height: 100vh;
+    max-height: 1000vh;
+    width: 100%;
+    background-color: rgb(35, 35, 35);
+    display: flex;
+    flex-direction: column;
+    font-family: Jost;
+    vertical-align: baseline;
+}
+
+#header {
+    height: auto;
+    width: 98%;
+    background-color: #111;
+    color: white;
+    font-size: 50px;
+    font-weight: 50px;
+    padding: 0 1% 0 1%;
+}
+
+#title {
+    color: white;
+    width: 100%;
+    align-self: center;
+    height: 40vh;
+    background-image: url("cosmos.jpeg");
+    background-size: cover;
+    font-family: Jost;
+    font-size: 80px;
+    text-align: start;
+    position: relative;
+}
+
+#titleContent {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    height: auto;
+    width: auto;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: ". text text text text text text text text .  image image image image .";
+}
+
+#mainText {
+    height: auto;
+    width: auto;
+    padding: 0 2% 0 2%;
+    background-color: #111;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: justify;
+    box-shadow: 0px 0px 5px black;
+    grid-area: text;
+}
+
+#zodiacLink {
+    height: auto;
+    width: 70%;
+    padding: 0 2% 0 2%;
+    background-color: #111;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 5px black;
+    padding: 0 0 20px 0;
+    display: none;
+}
+
+#images {
+    height: auto;
+    width: auto;
+    padding: 2% 2% 2% 2%;
+    background-color: #111;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: justify;
+    box-shadow: 0px 0px 5px black;
+    grid-area: image;
+    text-align: left;
+}
+
+.imgContainer {
+    width: 100%;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+#spacing {
+    height: 2.5%;
+    min-height: 20px;
+}
+
+#zodiacSpacing {
+    height: 2.5%;
+    min-height: 20px;
+    display: none;
+}
+
+.gridSpacing {
+    height: 2.5%;
+    min-height: 20px;
+    grid-area: spacing;
+}
+
+#dropdownBox {
+    display: flex;
+    font-size: 30px;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5em 0 0;
+    height: auto;
+}
+
+.dropdown:hover .dropdownContent {
+    display: block;
+}
+
+.dropdownContent {
+    display: none;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+}
+
+.dropdownContent a {
+    color: black;
+    display: block;
+}
+
+.dateInput {
+    font-size: 20px;
+    min-height: 20px;
+    margin: 5px 5% 5px 0;
+    height: auto; 
+    width: 50%;
+    background-color: white;
+    border: 1px solid gray;
+}
+
+#dateBox {
+    display: flex;
+    width: 80%;
+    height: auto;
+    flex-direction: row;
+}
+
+.days {
+    position: relative;
+    background-color: white;
+    font-size: 15px;
+    height: auto;
+    width: auto;
+    border: 1px solid black;
+}
+
+.days:hover {
+    background-color: rgb(0, 121, 219);
+}
+
+.months:hover {
+    background-color: rgb(0, 121, 219);
+}
+
+#submit {
+    font-size: 20px;
+    height: 2em;
+    width: 30%;
+    margin: 0.2em 0.2em 0.2em 0;background-color: rgb(0, 121, 219);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 5px blue;
+}
+#zodiacName {
+font-family: "Source Sans Pro";
+text-decoration: underline;
+}
+
+h2 {
+    color: white;
+    font-family: "Source Sans Pro";
+    font-size: 45px;
+    font-weight: 400;
+}
+
+h3 {
+    color: white;
+    font-family: "Source Sans Pro";
+    font-size: 23px;
+    font-weight: 400;
+}
+
+h4 {
+    color: white;
+    font-family: "Source Sans Pro";
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Astrology</title>
+<link href="astrology.css" rel="stylesheet">
+<style>
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div id="dropdownBox">
+                <div class="dropdown" style="color: white; text-decoration: none;"><a href="/home/michael/coding/websites/mickey-gs.github.io/index.html">Home</a></div>
+                <div class="dropdown" style="color: inherit; text-decoration: none;"><a href="websites.html">Websites</a></div>
+                <div class="dropdown">Scripts</div>
+                <div class="dropdown">Ruby</div>
+            </div>
+        </div>
+        <div id="title">
+            <div id="titleContent">Astrology</div>
+        </div>
+        <div id="spacing"></div>
+        <div id="main">
+            <div id="mainText">
+                <h2><u>Background</u></h2>
+                <h3>Astrology has played a significant role in human culture
+                    for several millenia. Organised systems of using the stars 
+                    to predict seasonal shifts, interpret divine messages, and dictate
+                    how medicine should be applied are as old as the Ancient Babylonians,
+                    with written descriptions of astrology dating back to 1800BC. However,
+                    archaelogical evidence shows that the progress of lunar cycles were
+                    tracked as early as 25,000 years ago, in addition to the many temples
+                    and structures created by ancient civilisations that align
+                    with the stars.<br>
+                    Astrology, though regarded as scientific until the 1700s, would lose its
+                    academic status due to the advent of scientific observations in astrology-
+                    most notably, the idea that the Sun and stars do not orbit the Earth (known
+                    as heliocentrism).<br>
+                    Today, many use astrology in the form of horoscopes- star-based predictions
+                    of fortune, compatibility between different people, and even future events.
+                </h3>
+                <h2><u>
+                    Your Zodiac
+                </u></h2>
+                <h3>
+                    Use the tool below to find out what your Zodiac sign is, and then follow
+                    the link it generates to find out what that says about you.<br>
+                    Date of birth:
+                </h3>
+                <div id="dateBox">
+                    <select class="dateInput" id="dayInput" name="dayInput">
+                        <option value="">Select day:</option>
+                    </select>
+                    <select class="dateInput" id="monthInput">
+                        <option value="">Select month:</option>
+                        <option class="months" value="1">January</option>
+                        <option class="months" value="2">February</option>
+                        <option class="months" value="3">March</option>
+                        <option class="months" value="4">April</option>
+                        <option class="months" value="5">May</option>
+                        <option class="months" value="6">June</option>
+                        <option class="months" value="7">July</option>
+                        <option class="months" value="8">August</option>
+                        <option class="months" value="9">September</option>
+                        <option class="months" value="10">October</option>
+                        <option class="months" value="11">November</option>
+                        <option class="months" value="12">December</option>
+                    </select>
+                </div>
+                <button id="submit">Submit</button>
+            </div>
+            <div id="images">
+                <div class="imgContainer">
+                    <img src="sunZodiac.jpg">
+                    <h4>An image of the Sun and the 12 Zodiac signs</h4>
+                </div>
+                <div id="spacing"></div>
+                <div id="spacing"></div>
+                <div class="imgContainer">
+                    <img src="zodiacCalc.jpg">
+                    <h4>An artistic rendering of a horoscope calculator-
+                        a diagram used to create horoscopes
+                    </h4>
+                </div>
+            </div>
+        <div class="gridSpacing"></div>
+        </div>
+        <div id="zodiacLink">
+            <h2 id="zodiacDec"></h2>
+            <a id="zodiacName"></a>
+        </div>
+        <div id="zodiacSpacing"></div>
+    </div>
+
+</body>
+<script>
+    const dayInput = document.getElementById("dayInput");
+    const monthInput = document.getElementById("monthInput");
+    const docFrag = new DocumentFragment();
+    const submit = document.getElementById("submit");
+    const zodiacDec = document.getElementById("zodiacDec");
+    const zodiacName = document.getElementById("zodiacName");
+    const zodiacSpacing = document.getElementById("zodiacSpacing");
+
+    for (i = 1; i <= 31; i++) {
+        let day = document.createElement("option");
+        day.textContent = i;
+        day.setAttribute("class", "days");
+        if (i < 10){
+            day.setAttribute("value", "0" + i)
+        }
+        else {
+            day.setAttribute("value", i)
+        };
+        docFrag.appendChild(day);
+        dayInput.appendChild(docFrag);
+    }
+
+    let generateLink = function() {
+        let dateOfBirth = monthInput.value + dayInput.value;
+        zodiacName.setAttribute("style", "font-size: 65px;");
+        zodiacSpacing.setAttribute("style", "display: block;");
+        if (dateOfBirth > 0 && dateOfBirth <= 119) {
+            zodiacSign = "Capricorn";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 119 && dateOfBirth <= 218) {
+            zodiacSign = "Aquarius";
+            zodiacDec.textContent = "YOU ARE AN";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 218 && dateOfBirth <= 320) {
+            zodiacSign = "Pisces";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 320 && dateOfBirth <= 419) {
+            zodiacSign = "Aries";
+            zodiacDec.textContent = "YOU ARE AN";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 419 && dateOfBirth <= 520) {
+            zodiacSign = "Taurus";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 520 && dateOfBirth <= 620) {
+            zodiacSign = "Gemini";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 620 && dateOfBirth <= 722) {
+            zodiacSign = "Cancer";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 722 && dateOfBirth <= 822) {
+            zodiacSign = "Leo";
+           zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 822 && dateOfBirth <= 922) {
+            zodiacSign = "Virgo";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 922 && dateOfBirth <= 1022) {
+            zodiacSign = "Libra";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 1022 && dateOfBirth <= 1122) {
+           zodiacSign =  "Scorpio";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 1122 && dateOfBirth <= 1221) {
+           zodiacSign =  "Sagittarius";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else if (dateOfBirth > 1221) {
+           zodiacSign =  "Capricorn";
+            zodiacDec.textContent = "YOU ARE A";
+            zodiacName.textContent = zodiacSign;
+        }
+        else console.log("how");
+        zodiacName.setAttribute("href", `${zodiacSign}.html`)
+        zodiacLink.setAttribute("style", "display: block;");
+        zodiacLink.scrollIntoView();
+    }
+
+    submit.addEventListener("click", generateLink)
+</script>
+</html>

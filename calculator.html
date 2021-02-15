@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<link href="scripts.css" rel="stylesheet">
+<style>
+    #calculator {
+        display: grid;
+        grid-template-areas: 
+        "screen screen screen screen"
+        "open close multiply divide"
+        "seven eight nine subtract"
+        "four five six add"
+        "one two three equals"
+        "point zero clear equals";
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 10px 10px;
+        height: 500px;
+        width: 500px;
+    }
+
+    .numbers {
+        grid-area: numbers;
+        background-color: #555;
+        height: auto;
+        width: auto;
+        font-size: 40px;
+        color: white;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+        border-bottom-left-radius: 5%;
+        border-bottom-right-radius: 5%;
+        text-align: center;
+        padding: 15% 0 0 0;
+    }
+
+    .bottomButtons {
+        background-color: black;
+        height: auto;
+        width: auto;
+        font-size: 40px;
+        color: white;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+        border-bottom-left-radius: 5%;
+        border-bottom-right-radius: 5%;
+        text-align: center;
+        padding: 15% 0 0 0;
+    }
+
+    .operations {
+        background-color: rgb(16, 135, 190);
+        height: auto;
+        width: auto;
+        font-size: 40px;
+        color: white;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+        border-bottom-left-radius: 5%;
+        border-bottom-right-radius: 5%;
+        text-align: center;
+        padding: 15% 0 0 0;
+    }
+
+    #one {
+        grid-area: one;
+    }
+
+    #two {
+        grid-area: two;
+    }
+
+    #three {
+        grid-area: three;
+    }
+
+    #four {
+        grid-area: four;
+    }
+
+    #five {
+        grid-area: five;
+    }
+
+    #six {
+        grid-area: six;
+    }
+
+    #seven {
+        grid-area: seven;
+    }
+
+    #eight {
+        grid-area: eight;
+    }
+
+    #nine {
+        grid-area: nine;
+    }
+
+    #zero {
+        grid-area: zero;
+    }
+
+    #point {
+        grid-area: point;
+    }
+
+    #clear {
+        grid-area: clear;
+    }
+
+    #open {
+        grid-area: open;
+    }
+
+    #close {
+        grid-area: close;
+    }
+
+    #multiply {
+        grid-area: multiply;
+    }
+
+    #divide {
+        grid-area: divide;
+    }
+
+    #subtract {
+        grid-area: subtract;
+    }
+    
+    #add {
+        grid-area: add;
+    }
+
+    #equals {
+        grid-area: equals;
+        background-color: rgb(16, 135, 190);
+        height: auto;
+        width: auto;
+        font-size: 40px;
+        color: white;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+        border-bottom-left-radius: 5%;
+        border-bottom-right-radius: 5%;
+        text-align: center;
+        padding: 15% 0 0 0;
+    }
+
+    #test {
+        height: 50px;
+        width: 50px;
+        background-color: red;
+    }
+
+    #screen {
+    font-size: 30px;
+    width: auto;
+    height: auto;
+    border: 1px solid rgb(180, 180, 180);
+    grid-area: screen;
+    background-color: white;
+}
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            CALCULATOR
+            <div id="dropdownBox">
+                <div class="dropdown"><a href="index.html">Home</a></div>
+                <div class="dropdown"><a href="websites.html">Websites</a></div>
+                <div class="dropdown">Scripts</div>
+                <div class="dropdown">Ruby</div>
+            </div>
+        </div>
+        <div id="spacing"></div>
+        <div id="main">
+        <div id="spacing"></div>
+        <div id="calculator">
+            <div id="screen"></div>
+            <button class="numbers" id="one">1</button>
+            <button class="numbers" id="two">2</button>
+            <button class="numbers" id="three">3</button>
+            <button class="numbers" id="four">4</button>
+            <button class="numbers" id="five">5</button>
+            <button class="numbers" id="six">6</button>
+            <button class="numbers" id="seven">7</button>
+            <button class="numbers" id="eight">8</button>
+            <button class="numbers" id="nine">9</button>
+            <button class="numbers" id="zero">0</button>
+            <button class="bottomButtons" id="point">.</button>
+            <button class="bottomButtons" id="clear">C</button>
+            <button class="operations" id="open">(</button>
+            <button class="operations" id="close">)</button>
+            <button class="operations" id="multiply">x</button>
+            <button class="operations" id="divide">÷</button>
+            <button class="operations" id="subtract">-</button>
+            <button class="operations" id="add">+</button>
+            <button id="equals">=</button>
+        </div>
+        <div id="spacing"></div>
+        </div>
+    </div>
+</body>
+<script>
+    let memory = [];
+    let operators = [];
+    let memoryNew = "";
+    let expression = [];
+
+    let displayNumber = function() {
+        memoryNew += this.textContent;
+        screen.textContent += this.textContent;
+        return memoryNew;
+    }
+
+    let storeNumber = function() {
+        memory.push(memoryNew);
+        screen.textContent += ` ${this.textContent} `;
+        operators.push(this.textContent);
+        memoryNew = "";
+    }
+
+    let evaluate = function() {
+        memory.push(memoryNew);
+        screen.textContent = " " + this.textContent;
+        memoryNew = "";
+        for (i = 0; i < (memory.length + operators.length); i++) {
+            if (i % 2 == 0) {
+                expression[i] = memory[(i / 2)];
+            }
+            else {
+                expression[i] = operators[((i - 1) / 2)];
+            }
+        }
+        let expString = expression.join(" ");
+        let expStringCorrect = expString.replace("x", "*").replace("÷", "/");
+        screen.textContent += eval(expStringCorrect);
+        return eval(expStringCorrect);
+    }
+
+    const equals = document.getElementById("equals");
+    equals.addEventListener("click", evaluate)
+    
+    const screen = document.getElementById("screen");
+    screen.textContent = "";
+    const numbers = document.getElementsByClassName("numbers");
+    for (i = 0; i < numbers.length; i++) {
+        numbers[i].addEventListener("click", displayNumber)
+    }
+
+    const operations = document.getElementsByClassName("operations");
+    for (i = 0; i < operations.length; i++) {
+        operations[i].addEventListener("click", storeNumber);
+    }
+    
+
+    const one = document.getElementById("one");
+    const two = document.getElementById("two");
+    const three = document.getElementById("three");
+    const four = document.getElementById("four");
+    const five = document.getElementById("five");
+    const six = document.getElementById("six");
+    const seven = document.getElementById("seven");
+    const eight = document.getElementById("eight");
+    const nine = document.getElementById("nine");
+</script>
+</html>
