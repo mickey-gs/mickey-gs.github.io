@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chess</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&family=Permanent+Marker&family=Poppins:wght@400;600;700&display=swap');
+
+            body {
+                font-family: 'EB Garamond', 'Times New Roman', Times, serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            .pieceImage {
+                height: 100%;
+                width: 100%;
+                display: block;
+                margin: 0;
+                padding: 0;
+            }
+
+            a:link {
+                color: inherit;
+            }
+
+            a:visited {
+                color: inherit;
+            }
+
+            a:hover {
+                color: #0191C8;
+            }
+
+            .wrapper {
+                width: auto;
+                height: auto;
+                background-color: white;
+            }
+
+            .board {
+                border: 3px solid #8C8984;
+                border-collapse: collapse;
+                margin: auto;
+            }
+
+            .rank {
+                background-color: beige;
+            }
+
+            .infoColumn {
+                background-color: white;
+                border: 3px dashed #74C2E1;
+                border-radius: 1em;
+                box-shadow: 0em 0em 1em #74C2E1;
+                padding: 1em;
+            }
+
+            .darkSquare {
+                background-color: burlywood;
+            }
+
+            .highlightDarkSquare {
+                background-color: #0191C8;
+            }
+
+            .highlightSquare {
+                background-color: #0190c842;
+            }
+
+            #header {
+                border-bottom: 2px dashed #74C2E1;
+            }
+
+            #title {
+                margin: 0;
+                color: black;
+            }
+
+            #footer {
+                border-top: 2px dashed #74C2E1;
+                margin-top: 2.5em;
+            }
+
+            #fideLink {
+                font-style: italic;
+                color: rgb(49, 49, 49);
+            }
+
+            /* Style rules for all narrow viewports (small phones, portrait tablets, narrow windows) */
+            @media only screen and (min-width: 0px) {
+                h1 {
+                    font-size: 5em;
+                }
+
+                h2 {
+                font-size: 4.5em;
+                }
+
+                h3 {
+                    font-size: 4em;
+                }
+
+                p {
+                    font-size: 3em;
+                }
+
+                ul {
+                    font-size: 3em;
+                }
+
+                ol {
+                    font-size: 3em;
+                }
+
+                td {
+                    height: 2.5em;
+                    width: 2.5em;
+                }
+
+                #header {
+                    padding: 0.5em 0 0 0.5em;
+                }
+
+                #main {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 50px;
+                    padding: 2.5em 5vw 0 5vw;
+                }
+
+                td {
+                    max-height: 12.5%;
+                    max-width: 12.5%;
+                    padding: 0;
+                }
+
+                .board {
+                    height: 50vw;
+                    width: 50vw;
+                }
+
+                .rank {
+                    height: 1em;
+                }
+
+                .pieceImage {
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: block;
+                }
+            }
+            
+            /* Style rules for medium viewports (large phones, landscape tablets and small laptops) */
+            @media only screen and (min-width: 768px) {
+                h1 {
+                    font-size: 5em;
+                }
+
+                h2 {
+                font-size: 4.5em;
+                }
+
+                h3 {
+                    font-size: 4em;
+                }
+
+                p {
+                    font-size: 3em;
+                }
+
+                ul {
+                    font-size: 3em;
+                }
+
+                ol {
+                    font-size: 3em;
+                }
+
+                td {
+                    height: 2.5em;
+                    width: 2.5em;
+                }
+
+                #header {
+                    padding: 0.5em 0 0 0.5em;
+                }
+
+                #main {
+                    display: grid;
+                    grid-template-areas: "howPiecesMove howToPlay";
+                    grid-gap: 50px 50px;
+                    font-size: 1em;
+                    grid-template-columns: 1fr 1fr;
+                    padding: 2.5em 4vw 0 4vw;
+                }
+
+                td {
+                    max-height: 12.5%;
+                    max-width: 12.5%;
+                    padding: 0;
+                }
+
+                .board {
+                    height: 50vw;
+                    width: 50vw;
+                }
+
+                .rank {
+                    height: 1em;
+                }
+
+                .pieceImage {
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: block;
+                }
+            }
+
+            /* Large devices (laptops/desktops, 992px and up) */
+            @media only screen and (min-width: 992px) {
+                h1 {
+                    font-size: 4em;
+                }
+
+                h2 {
+                    font-size: 2.5em;
+                }
+
+                h3 {
+                    font-size: 2em;
+                }
+
+                p {
+                    font-size: 1.5em;
+                }
+
+                ul {
+                    font-size: 1.5em;
+                }
+
+                ol {
+                    font-size: 1.5em;
+                }
+
+                td {
+                    height: 2.5em;
+                    width: 2.5em;
+                }
+
+                #header {
+                    padding: 0.5em 0 0 0.5em;
+                }
+
+                #main {
+                    display: grid;
+                    grid-template-areas: "howPiecesMove howToPlay";
+                    grid-gap: 50px 50px;
+                    font-size: 1em;
+                    grid-template-columns: 1fr 1fr;
+                    padding: 2.5em 4vw 0 4vw;
+                }
+
+                td {
+                    max-height: 12.5%;
+                    max-width: 12.5%;
+                    padding: 0;
+                }
+
+                .board {
+                    height: 25vw;
+                    width: 25vw;
+                }
+
+                .pieceImage {
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: block;
+                }
+            }
+
+            /* Extra large devices (large laptops and desktops, 1200px and up) */
+            @media only screen and (min-width: 1200px) {
+                
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="header" class="wrapper">
+            <h1 id="title">Chess- the Game of Kings</h1>    
+        </div>
+
+        <div id="main" class="wrapper">
+            <div id="howPiecesMove" class="infoColumn">
+                <h2>How the Pieces Move</h2>
+                <h3>The King</h3>
+                <p>
+                    The rules for the king's movement are mostly very simple; it can move to or capture on any adjacent or diagonal square, provided that the square is not occupied by a friendly piece and that it does not move into <em>check</em> (explained in the <a href="#howToPlay">'How to Play' section</a>).
+                </p>
+                    <table class="board">
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        </tr>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td>
+                            <td></td>
+                            <td class="highlightDarkSquare"></td>
+                            <td class="highlightSquare"></td>
+                            <td class="highlightDarkSquare"></td><td></td><td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                            <td class="highlightSquare"></td>
+                            <td class="darkSquare">
+                                <img class="pieceImage" src="chessImages/BlackKing.png">
+                            </td>
+                            <td class="highlightSquare"></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td>
+                            <td></td>
+                            <td class="highlightDarkSquare"></td>
+                            <td class="highlightSquare"></td>
+                            <td class="highlightDarkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        </tr>
+                    </table>
+                <p>
+                    Under some circumstances, the king can also perform a manoeuvre known as 'castling'. This is where the king moves two squares towards a rook of the same colour, and the rook moves to the square that king has just moved through. This can be done in one turn, but the following criteria must be met:
+                </p>
+                <ul>
+                    <li>
+                        The king must have not been moved previously in the game.
+                    </li>
+                    <li>
+                        The rook being castled with must not have moved.
+                    </li>
+                    <li>
+                        The king must not be in check, castle into check, or 'move through' check (that is, the king cannot castle if an enemy piece attacks the square between its origin and destination squares).
+                    </li>
+                </ul>
+                <p>
+                    The boards below show the white king 'castling kingside' and the black king 'castling queenside'.
+                </p>
+                <table class="board" style="margin-bottom: 1em;">
+                    <tr class="rank">
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackCastle.png">
+                        </td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackKing.png">
+                        </td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteKing.png">
+                        </td><td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteCastle.png">
+                        </td>
+                    </tr>
+                </table>
+                <table class="board">
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackKing.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackCastle.png">
+                        </td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td><img class="pieceImage" src="chessImages/WhiteCastle.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteKing.png">
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <h3>The Rook</h3>
+                <p>
+                    The rook can move along the rank (row) or file (column) of the board it is positioned on (but not both at the same time). If an enemy piece is on its rank or file, with no pieces in between, it may move to that piece's square, capturing it. If a friendly piece is on the same rank or file, it may move to the square immediately before it, but may not occupy the same square or capture the friendly piece.
+                </p>
+                <table class="board">
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackQueen.png">
+                        </td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteBishop.png">
+                        </td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteCastle.png">
+                        </td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare">
+                            <img class="pieceImage" src="chessImages/BlackKnight.png">
+                        </td>
+                        <td></td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackBishop.png">
+                        </td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    </tr>
+                </table>
+
+                <h3>The Bishop</h3>
+                <p>
+                    The bishop may move along one of the diagonals on which it stands. It cannot move through or to the same square as friendly pieces. It can also capture any enemy piece along its diagonals, provided that there are no pieces in between it and the bishop.
+                </p>
+                <table class="board">
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackKing.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackCastle.png">
+                        </td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td class="highlightSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td class="highlightSquare"></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteBishop.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteCastle.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteKing.png">
+                        </td>
+                        <td class="highlightSquare"></td>
+                    </tr>
+                </table>
+
+                <h3>The Queen</h3>
+                <p>
+                    The queen's movement rules are those of the bishop and the rook combined; it may move and capture along the rank, file, or one of the diagonals on which it is positioned.<br>This makes it the most powerful piece, as it can by far control the most squares on the board, which can be seen below.
+                </p>
+                <table class="board">
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackQueen.png">
+                        </td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td>
+                        <td class="highlightSquare"></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                    </tr>
+                </table>
+
+                <h3>The Knight</h3>
+                <p>
+                    The knight is the only piece that does not move along or across squares — it 'jumps' from its origin square to its destination. It cannot be blocked by other pieces; it can move to any square in its range unless that square is occupied by a friendly piece. Its movement rules are the most complicated, so I will provide several versions of explaining its rules of motion:
+                </p>
+                <ul>
+                    <li>
+                        It can move to any square reached by moving once diagonally and then once orthogonally. For example, it can move diagonally up and to the right, and then one more square up or right.
+                    </li>
+                    <li>
+                        It can move to any square within a kind of 'ring' around the knight — this ring is made up of the squares that are closest to the knight but not on the same rank, file or diagonal.
+                    </li>
+                    <li>
+                        It can move to any square reachable by moving in the shape of an uppercase 'L'. The L is 3 squares tall and 2 squares across at its base. The move is legal so long as the knight and its destination square are positioned at each 'end' of the L.
+                    </li>
+                </ul>
+                <table class="board">
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackCastle.png">
+                        </td>
+                        <td class="highlightDarkSquare">
+                            <img class="pieceImage" src="chessImages/BlackKing.png">
+                        </td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteKnight.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                        <td class="highlightDarkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <h3>The Pawn</h3>
+                <p>
+                    The pawn may only move forward, towards the rank furthest from the player controlling it. It may move only one square at a time, but on its first move it may move forward 2 squares. It may not move forward if blocked.<br>
+                    It does not capture in the same direction it moves — it can capture pieces to the squares immediately in front of diagonal to it.<br>
+                </p>
+                    <table class="board">
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td class="highlightSquare"></td>
+                            <td class="darkSquare"></td>
+                            <td class="highlightSquare"></td>
+                            <td class="highlightDarkSquare">
+                                <img class="pieceImage" src="chessImages/BlackPawn.png">
+                            </td>
+                            <td></td>
+                            <td class="darkSquare"></td>
+                            <td class="highlightSquare"></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare">
+                                <img class="pieceImage" src="chessImages/WhitePawn.png">
+                            </td>
+                            <td></td>
+                            <td class="darkSquare">
+                                <img class="pieceImage" src="chessImages/WhitePawn.png">
+                            </td>
+                            <td></td>
+                            <td class="darkSquare">
+                                <img class="pieceImage" src="chessImages/BlackPawn.png">
+                            </td><td></td>
+                            <td class="highlightDarkSquare"></td>
+                            <td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                            <td>
+                                <img class="pieceImage" src="chessImages/WhitePawn.png">
+                            </td>
+                            <td class="darkSquare"></td>
+                            <td>
+                                <img class="pieceImage" src="chessImages/WhitePawn.png">
+                            </td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        </tr>
+                    </table>
+
+                <p>
+                    If an enemy pawn moves forward 2 squares, and a friendly pawn could have captured it if it had only moved one square, the friendly pawn may capture it. This is only allowed on the move immediately after the enemy pawn is moved. It captures it in the normal way, forward and diagonally. This special capture rule is known as 'en passant'.<br>
+                    In the example below, black's last move was to push their pawn forward two squares. This enables white to take their pawn via en passant.
+                </p>
+                    <table class="board">
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="highlightDarkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare">
+                                <img class="pieceImage" src="chessImages/WhitePawn.png">
+                            </td>
+                            <td>
+                                <img class="pieceImage" src="chessImages/BlackPawn.png">
+                            </td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        <tr class="rank">
+                            <td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td>
+                        </tr>
+                        <tr class="rank">
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                            <td class="darkSquare"></td><td></td>
+                        </tr>
+                    </table>
+                
+                <p>
+                    If a friendly pawn reaches the rank furthest from the player controlling it, it 'promotes' on that turn, and is exchanged for either a bishop, knight, rook, or queen — whatever the player controlling it chooses. 
+                </p>
+            </div>
+            <div id="howToPlay" class="infoColumn">
+                <h2>How To Play</h2>
+                <p id="fideLink">
+                    For a more formal, complete version of the rules, see the <a href="https://www.fide.com/FIDE/handbook/LawsOfChess.pdf" target="blank">official <abbr title="International Chess Federation">FIDE</abbr> rulebook</a>.
+                </p>
+                <p>
+                    Chess is a game for two players. The two players sit opposite each other, at each end of the chessboard. They take turns to move one of their own pieces on their turn. The player with the white pieces moves first, and play continues until the game has ended either by checkmate, stalemate, or draw (or by one player running out of time, if they are playing with clocks).<br>
+                    At the start of the game, the board is set up as below. 
+                </p>
+                <table class="board">
+                    <tr class="rank">
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackCastle.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackKnight.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackBishop.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackQueen.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackKing.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackBishop.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackKnight.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackCastle.png">
+                        </td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/BlackPawn.png">
+                        </td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                        <td class="darkSquare"></td><td></td>
+                    <tr class="rank">
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhitePawn.png">
+                        </td>
+                    </tr>
+                    <tr class="rank">
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteCastle.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteKnight.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteBishop.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteQueen.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteKing.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteBishop.png">
+                        </td>
+                        <td class="darkSquare">
+                            <img class="pieceImage" src="chessImages/WhiteKnight.png">
+                        </td>
+                        <td>
+                            <img class="pieceImage" src="chessImages/WhiteCastle.png">
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Check</h3>
+                <p>
+                    If a player is able to capture a piece on their <em>next</em> turn, then that piece is said to be 'attacked'. If an enemy piece is attacking a player's king, their king is said to be 'in check'. A player may not, on their turn:
+                </p>
+                <ul>
+                    <li>
+                        Leave their king in check.
+                    </li>
+                    <li>
+                        Move their king into check.
+                    </li>
+                    <li>
+                        Expose their king to being checked by moving another piece.
+                    </li>
+                </ul>
+
+                <h3>Checkmate</h3>
+                <p>
+                    If a player puts their opponent's king into check, and they are unable to escape check on their next turn, they have been 'checkmated' and have lost the game. Unless playing under time control, the only way to win is to checkmate the opponent's king; even if a player captures all of the opponent's pieces, unless they checkmate their opponent's king they have not won.
+                </p>
+
+                <h3>Stalemate</h3>
+                <p>
+                    If a player's king is not in check, but they have no legal moves (i.e., they cannot make any moves without having their king be checked), then they have been 'stalemated' and the game is a draw.
+                </p>
+
+                <h3>Other Draws</h3>
+                <p>
+                    There are 4 other ways by which the game can be drawn:
+                </p>
+                <ol>
+                    <li>
+                        The Fifty Move Rule: if each player has made 50 moves without capturing a piece or moving a pawn, then the game is drawn.
+                    </li>
+                    <li>
+                        Draw by Agreement: if both players agree to a draw at any point, the game is drawn. For this to happen, one player must offer a draw on their turn, and the other must accept it on their next turn. Some tournaments do not allow draws by agreement before a certain number of moves have been made, in an effort to make games more competitive.
+                    </li>
+                    <li>
+                        Threefold Repetition: if the same exact board position has been reached three times, then after the third repetition each player can request a tie from the game's arbiter on their turn.
+                    </li>
+                    <li>
+                        Insufficient Material: if both players lack the pieces required to checkmate their opponent via a series of legal moves, then the game is drawn. This occurs with the following piece combinations:
+                        <ul style="font-size: inherit;">
+                            <li>King vs king</li>
+                            <li>King and bishop vs king</li>
+                            <li>King and bishop vs king and bishop, where both bishops are of the same colour (i.e., move along diagonals of the same colour of square)</li>
+                            <li>King and knight vs king</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Playing with Time Control</h3>
+
+                <h3>Move Notation</h3>
+                <p>
+                    Modern chess uses algebraic notation to describe moves made during games. It is very useful to have a standard, as this allows for games to be recorded, shared, and analysed by other players or chess engines. How moves are recorded can be difficult to understand at first, but the process is explained very well on <a href="https://en.wikipedia.org/wiki/Algebraic_notation_(chess)" target="blank">its Wikipedia page</a>.<br>
+                    Other notable standards in chess notation are: <a href="https://en.wikipedia.org/wiki/Portable_Game_Notation" target="blank">Portable Game Notation</a>, used to describe a full game with algebraic move notation; and <a href="https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation" target="blank">Forsyth-Edwards Notation</a>, used to describe specific board positions.
+                </p>
+
+                <h3>Competitions</h3>
+                <p>
+                    There are many different formats for chess competitions, such as round robins (each player plays every other player a set number of times), one-on-one matches, knockout tournaments, and swiss-system tournaments. However, there are important rules consistent across formats:
+                </p>
+                <ul>
+                    <li>
+                        Generally, wins count for 1 tournament point, draws a half point, and losses 0 points.
+                    </li>
+                    <li>
+                        Players are not allowed to speak to each other or anyone else during their games, but may get up to walk around, get a drink of water or use the bathroom.
+                    </li>
+                    <li>
+                        Players may not consult notes or digital devices, and may not write anything on their movesheet apart from the moves made, their time, and the game's outcome.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="footer" class="wrapper">
+            <p style="margin: 0;">
+                I'm a sillius billius, and this is some placeholder text.<br>
+                Mr Bombastic,<br>
+                Mr Fantastic,<br>
+                Mr Ro-ro-ro...<br>
+                Ro-mantic<br>
+                (repeat)
+            </p>
+        </div>
+    </body>
+</html>
